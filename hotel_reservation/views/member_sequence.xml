@@ -1,0 +1,73 @@
+<odoo>
+<data>
+
+    <record id="sequence_self_service" model="ir.sequence">
+       <field name="name">Self Service</field>
+       <field name="code">self.service</field>
+       <field name="active">TRUE</field>
+       <field name="prefix">OB/</field>
+       <field name="padding">5</field>
+       <field name="number_next">1</field>
+       <field name="number_increment">1</field>
+    </record>
+
+    <record id="member_details" model="ir.ui.view">
+         <field name="name">member.details</field>
+         <field name="model">res.partner</field>
+         <field name="inherit_id" ref="base.view_partner_form"/>
+         <field name="arch" type="xml">
+             <xpath expr="//field[@name='name']" position='before'>
+                 <h1>
+                 <field name="member_seq"/>
+                 </h1>
+             </xpath>
+             <xpath expr="//field[@name='vat']" position='after'>
+                 <field name="aadhar_card"/>
+                 <field name="dob" widget="date"/>
+                 <field name="age"/>
+                 <field name="gender"/>
+             </xpath>
+             <xpath expr="//field[@name='category_id']" position='after'>
+                 <field name="passport"/>
+             </xpath>
+         </field>
+    </record>
+
+<!--    <record id="member_details" model="ir.ui.view">-->
+<!--         <field name="name">member.details</field>-->
+<!--         <field name="model">res.partner</field>-->
+<!--         <field name="inherit_id" ref="base.res_partner_kanban_view"/>-->
+<!--         <field name="arch" type="xml">-->
+<!--             <li>-->
+<!--             <xpath expr="/kanban/templates/t/div/div/ul/li/field[@name='parent_id']" position='after'>-->
+<!--                 <field name="kan_member_seq"/>-->
+<!--             </xpath>-->
+<!--             </li>-->
+<!--         </field>-->
+<!--    </record>-->
+
+    <record id="family_member_details" model="ir.ui.view">
+   	    <field name="name">family.member.details</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[last()]" position="after">
+                <notebook>
+                    <page>
+                        <field name="family_details" widget="one2many_list">
+                            <tree>
+                                <field name = "member_name"/>
+                                <field name = "relation"/>
+                                <field name = "age"/>
+                                <field name = "rel_gender"/>
+                                <field name = "nominee"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+
+</data>
+</odoo>
