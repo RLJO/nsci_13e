@@ -471,8 +471,16 @@ class HotelReservation(models.Model):
             folio = hotel_folio_obj.create(folio_vals)
             for rm_line in folio.room_line_ids:
                 rm_line.product_id_change()
-            self.write({"folios_ids": [(6, 0, folio.ids)], "state": "done"})
-        return True
+            # self.write({"folios_ids": [(6, 0, folio.ids)], "state": "done"})
+            self.write({"folios_ids": [(6, 0, folio.ids)]})
+        # return True
+
+        return {'view_mode': 'form',
+                'res_id': folio.id,
+                'type': 'ir.actions.act_window',
+                'res_model': 'hotel.folio',
+                'target': 'current'
+                }
 
     def _onchange_check_dates(
         self, checkin_date=False, checkout_date=False, duration=False
@@ -640,3 +648,28 @@ class HotelRoomReservationLine(models.Model):
     )
     reservation_id = fields.Many2one("hotel.reservation", "Reservation")
     status = fields.Selection(string="state", related="reservation_id.state")
+
+
+class AccountPaymentInherit(models.Model):
+    _inherit = "account.payment"
+
+
+    def post(self):
+        res = super(AccountPaymentInherit, self).post()
+
+        inv_id = self.env['account.move'].browse(self._context.get('active_id'))
+
+        # hotel_brw = self.env['hotel.reservation'].search({'id', '=', inv_id.folio_id.id})
+        # hotel_brw.confirm_reservation()
+        inv_id.folio_id.reservation_id.confirm_reservation()
+
+        return res
+
+
+class AccountMoveInherit(models.Model):
+    _inherit = "account.move"
+
+    folio_id = fields.Many2one('hotel.folio', 'Folio')
+
+
+

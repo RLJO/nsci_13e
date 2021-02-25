@@ -15,20 +15,22 @@
                         states="confirm"
                         class="oe_highlight"
                     />
+
+<!--                        name="confirm_reservation"-->
                     <button
-                        name="confirm_reservation"
+                        name="create_folio"
                         string="Confirm"
                         states="draft"
                         class="oe_highlight"
                         type="object"
                     />
-                    <button
-                        name="create_folio"
-                        string="Create Folio"
-                        states="confirm"
-                        class="oe_highlight"
-                        type="object"
-                    />
+<!--                    <button-->
+<!--                        name="create_folio"-->
+<!--                        string="Create Folio"-->
+<!--                        states="confirm"-->
+<!--                        class="oe_highlight"-->
+<!--                        type="object"-->
+<!--                    />-->
                     <button
                         name="cancel_reservation"
                         string="Cancel Reservation"
