@@ -27,6 +27,7 @@
                  <field name="age"/>
                  <field name="gender"/>
                  <field name="non_member"/>
+<!--                 <field name="masseur"/>-->
                  <field name = "relation" attrs="{'invisible':[('non_member','=',False)]}"/>
                  <field name="blood_g"/>
              </xpath>

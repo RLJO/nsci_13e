@@ -1,0 +1,105 @@
+<odoo>
+
+    <record id="custom_salon" model="ir.ui.view">
+         <field name="name">custom.salon</field>
+         <field name="model">salon.booking</field>
+         <field name="inherit_id" ref="salon_management.salons_booking_form"/>
+         <field name="arch" type="xml">
+
+             <xpath expr="//field[@name='name']" position='before'>
+                 <field name="source"/>
+                 <field name="member_name" domain="[('free_member', '!=', False)]" attrs="{'invisible':[('source','!=','m')]}"/>
+                 <field name="membership_id" attrs="{'invisible':[('source','!=','m')]}"/>
+                 <field name="guest_name" attrs="{'invisible':['|',('source','!=','w'), ('source','!=','w')]}"/>
+                 <field name="guest_name" attrs="{'invisible':[('source','!=','g')]}" domain="[('non_member', '!=', False)]" context="{'default_non_member':True}"/>
+             </xpath>
+
+
+             <xpath expr="//field[@name='name']" position='attributes'>
+                 <attribute name="invisible">1</attribute>
+             </xpath>
+
+<!--             <xpath expr="//field[@name='services']" position='attributes'>-->
+<!--                 <attribute name="invisible">1</attribute>-->
+<!--             </xpath>-->
+
+<!--             <xpath expr="//field[@name='phone']" position='attributes'>-->
+<!--                 <attribute name="invisible">1</attribute>-->
+<!--             </xpath>-->
+
+             <xpath expr="//field[@name='services']" position='after'>
+<!--                 <field name="name" attrs="{'invisible':1}"/>-->
+                 <field name="n_gender"/>
+                 <field name="pref_gender"/>
+             </xpath>
+
+             <xpath expr="//field[@name='chair_id']" position='after'>
+                 <field name="masseur_info"/>
+             </xpath>
+
+             <xpath expr="//field[@name='pref_gender']" position='after'>
+                 <field name="nationality"/>
+<!--                 <field name="service_type"/>-->
+             </xpath>
+
+             <xpath expr="//field[@name='masseur_info']" position='after'>
+                 <field name="remark"/>
+             </xpath>
+
+<!--             <xpath expr="//field[@name='masseur_info']" position='after'>-->
+<!--                 <field name="chair_info" domain="[('gender', '!=', 'Male')]"/>-->
+<!--             </xpath>-->
+
+         </field>
+    </record>
+
+<!--    <record id="custom_masseur" model="ir.ui.view">-->
+<!--         <field name="name">custom.masseur</field>-->
+<!--         <field name="model">res.users</field>-->
+<!--         <field name="inherit_id" ref="base.view_users_form"/>-->
+<!--         <field name="arch" type="xml">-->
+<!--             <xpath expr="//field[@name='login']" position='after'>-->
+<!--                 <h6>-->
+<!--                     <label for="masseur" string="Masseur"/>-->
+<!--                     <field name="masseur"/>-->
+<!--                     <br/>-->
+<!--                     <label for="c_gender" string="Gender"/>-->
+<!--                     <field name="c_gender"/>-->
+<!--                 </h6>-->
+<!--             </xpath>-->
+<!--         </field>-->
+<!--    </record>-->
+
+<!--    <record id="chair_custom" model="ir.ui.view">-->
+<!--         <field name="name">chair.custom</field>-->
+<!--         <field name="model">salon.chair</field>-->
+<!--         <field name="inherit_id" ref="salon_management.salon_chair_form"/>-->
+<!--         <field name="arch" type="xml">-->
+<!--             <xpath expr="//field[@name='date']" position='after'>-->
+<!--                 <field name="gender"/>-->
+<!--             </xpath>-->
+<!--         </field>-->
+<!--    </record>-->
+
+    <record id="salon_new_masseur" model="ir.actions.act_window">
+        <field name="name">New Masseur</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="res_model">masseur.management</field>
+        <field name="view_mode">kanban,tree,form</field>
+<!--        <field name="search_view_id" ref="hotel_custom.salon_new_masseur_id" />-->
+    </record>
+
+<!--    <record id="custom_masseur_create" model="ir.ui.view">-->
+<!--         <field name="name">custom.masseur.create</field>-->
+<!--         <field name="model">masseur.management</field>-->
+<!--        <field name="inherit_id" ref="salon_new_masseur"/>-->
+<!--         <field name="arch" type="xml">-->
+<!--             <field name="name"/>-->
+<!--             <field name="gender"/>-->
+<!--         </field>-->
+<!--    </record>-->
+
+    <menuitem id="masseur_master_custom" name="Masseur" parent="salon_management.salon_management_salon" action="salon_new_masseur"/>
+<!--    <menuitem id="salon_management_bookings" name="Bookings" parent="salon_management_salon" action="salon_booking_action"/>-->
+
+</odoo>
