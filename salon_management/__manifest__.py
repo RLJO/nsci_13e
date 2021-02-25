@@ -27,7 +27,7 @@
     'website': "https://www.cybrosys.com",
     'company': 'Cybrosys Techno Solutions',
     "category": "Industries",
-    'depends': ['base', 'account', 'mail', 'website'],
+    'depends': ['base', 'account', 'mail', 'website', 'membership'],
     'data': [
              'security/salon_security.xml',
              'security/ir.model.access.csv',

@@ -11,9 +11,9 @@ class member_sequence_order(models.Model):
 
     member_seq = fields.Char(string="Service Number", readonly=True, required=True, copy=False, default='New')
 
-    dob = fields.Date(string="Date of Birth", required=True)
+    dob = fields.Date(string="Date of Birth")
 
-    age = fields.Integer(string="Age", readonly=True, compute='_onchange_dob')
+    age = fields.Integer(string="Age", compute='_onchange_dob')
 
     gender = fields.Selection(selection=[('m', 'Male'), ('f', 'Female'), ('o', 'Others'), ], string='Gender', default='')
 
@@ -26,7 +26,9 @@ class member_sequence_order(models.Model):
 
     nominee = fields.Boolean(string="Nominee")
 
-    non_member = fields.Boolean(string='Non-Member', readonly=True)
+    # masseur = fields.Boolean(string="Masseur")
+
+    non_member = fields.Boolean(string='Non-Member')
 
     blood_g = fields.Selection(selection=[('op', 'O+ve'), ('on', 'O-ve'), ('ap', 'A+ve'), ('an', 'A-ve'), ('bp', 'B+ve'), ('bn', 'B-ve'), ('abp', 'AB+ve'), ('abn', 'AB-ve'), ], string='Blood Group', default='')
 
@@ -48,6 +50,8 @@ class member_sequence_order(models.Model):
                 date2 = datetime.today()
                 r = relativedelta.relativedelta(date2, date1)
                 record.age = r.years
+            else:
+                record.age = 0
 
 # class member_family_details(models.Model):
 #     _name = 'member.family.details'

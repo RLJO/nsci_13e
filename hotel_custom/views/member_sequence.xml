@@ -27,6 +27,7 @@
                  <field name="age"/>
                  <field name="gender"/>
                  <field name="non_member"/>
+<!--                 <field name="masseur"/>-->
                  <field name = "relation" attrs="{'invisible':[('non_member','=',False)]}"/>
                  <field name="blood_g"/>
              </xpath>
@@ -56,9 +57,9 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//page[last()]" position="after">
-                <notebook attrs="{'invisible':[('non_member','=',True)]}">
-                    <page>
+<!--            <xpath position="inside">-->
+                <notebook position="inside">
+                    <page string="Family Details" attrs="{'invisible':[('non_member','=',True)]}">
                         <field name="family_details" widget="one2many_list" context="{'default_non_member':True}">
                             <tree>
                                 <field name = "name"/>
@@ -80,7 +81,7 @@
                         </field>
                     </page>
                 </notebook>
-            </xpath>
+<!--            </xpath>-->
         </field>
     </record>
 
