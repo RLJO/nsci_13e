@@ -81,15 +81,15 @@ class BookingInformation(models.Model):
             else:
                 return {'domain': {}}
 
-    # @api.onchange('source')
-    # def _onchange_source_custom(self):
-    #     for record in self:
-    #         if record.source == 'w':
-    #             return {'attribute': {'member_name': [('non_member', '=', True)]}}
-    #         elif record.source == 'g':
-    #             return {'attribute': {'member_name': [('non_member', '=', True)]}}
-    #         elif record.source == 'm':
-    #             return {'attribute': {}}
+    @api.onchange('source')
+    def _onchange_source_custom(self):
+        for record in self:
+            if record.source == 'm':
+                return {'domain': {'member_name': ['|', ('membership_state', '=', 'free'), ('membership_state', '=', 'paid')]}}
+            # elif record.source == 'g':
+            #     return {'attribute': {'member_name': [('non_member', '=', True)]}}
+            # elif record.source == 'm':
+            #     return {'attribute': {'member_name': [('non_member', '!=', True)]}}
 
 
 # class ChairManagement(models.Model):
