@@ -1,7 +1,7 @@
 # See LICENSE file for full copyright and licensing details.
 
 {
-    "name": "Hotel Reservation Management",
+    "name": "Hotel Reservation Inherit",
     "version": "13.0.1.0.0",
     "author": "Odoo Community Association (OCA), Serpent Consulting \
                 Services Pvt. Ltd., Odoo S.A.",
@@ -9,12 +9,14 @@
     "license": "AGPL-3",
     "summary": "Manages Guest Reservation & displays Reservation Summary",
     "website": "https://github.com/OCA/vertical-hotel/",
-    "depends": ["hotel", "stock", "mail", "base", "membership"],
+    "depends": ["hotel_reservation", "account"],
     "data": [
-        "security/ir.model.access.csv",
-        "views/member_sequence.xml",
-        "views/salon_management.xml"
+        "view/account_move_view_inherit.xml",
+
+
     ],
     "demo": [],
+    "qweb": [],
+    "external_dependencies": {"python": ["dateutil"]},
     "installable": True,
 }
