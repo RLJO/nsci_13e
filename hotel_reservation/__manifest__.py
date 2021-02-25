@@ -23,7 +23,8 @@
         "report/report_view.xml",
         "views/hotel_reservation_view.xml",
         "views/assets.xml",
-        "views/member_sequence.xml"
+        "views/member_sequence.xml",
+        "views/account_move_view_inherit.xml",
     ],
     "demo": ["demo/hotel_reservation_data.xml"],
     "qweb": ["static/src/xml/hotel_room_summary.xml"],
