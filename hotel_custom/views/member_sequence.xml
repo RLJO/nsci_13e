@@ -1,16 +1,6 @@
 <odoo>
 <data>
 
-    <record id="sequence_self_service" model="ir.sequence">
-       <field name="name">Self Service</field>
-       <field name="code">self.service</field>
-       <field name="active">TRUE</field>
-       <field name="prefix">OB-</field>
-       <field name="padding">5</field>
-       <field name="number_next">1</field>
-       <field name="number_increment">1</field>
-    </record>
-
     <record id="member_details" model="ir.ui.view">
          <field name="name">member.details</field>
          <field name="model">res.partner</field>
@@ -26,7 +16,7 @@
                  <field name="dob" widget="date"/>
                  <field name="age"/>
                  <field name="gender"/>
-                 <field name="non_member"/>
+                 <field name="non_member" attrs="{'invisible':[('non_member','=',False)]}"/>
 <!--                 <field name="masseur"/>-->
                  <field name = "relation" attrs="{'invisible':[('non_member','=',False)]}"/>
                  <field name="blood_g"/>
@@ -84,6 +74,62 @@
 <!--            </xpath>-->
         </field>
     </record>
+
+    <record id="customer_booking_details" model="ir.ui.view">
+   	    <field name="name">customer.booking.details</field>
+        <field name="model">hotel.reservation</field>
+        <field name="inherit_id" ref="hotel_reservation.view_hotel_reservation_form"/>
+        <field name="arch" type="xml">
+            <button name="cancel_reservation" position="after">
+                <button name="check_in_button" string="Check In" type="object"/>
+            </button>
+            <button name="check_in_button" position="after">
+                <button name="check_out_button" string="Check Out" type="object"/>
+            </button>
+            <button name="confirm_reservation" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </button>
+            <button name="create_folio" position="attributes">
+                <attribute name="states"></attribute>
+                <attribute name="string">Confirm</attribute>
+            </button>
+
+            <xpath expr="//field[@name='partner_invoice_id']" position='after'>
+                <field name="in_field" attrs="{'invisible':1}"/>
+            </xpath>
+            <xpath expr="//field[@name='checkin']" position='after'>
+                <field name="check_in"/>
+            </xpath>
+            <xpath expr="//field[@name='checkout']" position='after'>
+                <field name="check_out"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="membership_date_change" model="ir.ui.view">
+   	    <field name="name">customer.booking.details</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="membership.membership_products_form"/>
+        <field name="arch" type="xml">
+            <field name="membership_date_from" position="attributes">
+                <attribute name="required">0</attribute>
+            </field>
+            <field name="membership_date_to" position="attributes">
+                <attribute name="required">0</attribute>
+            </field>
+        </field>
+    </record>
+
+<!--    <record id="customer_booking_details_wizard" model="ir.ui.view">-->
+<!--   	    <field name="name">customer.booking.details.wizard</field>-->
+<!--        <field name="model">quick.room.reservation</field>-->
+<!--        <field name="inherit_id" ref="hotel_reservation.quick_room_reservation_form_view"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='partner_id']" position='after'>-->
+<!--                <field name="new_field"/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
 
 </data>
 </odoo>

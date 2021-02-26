@@ -9,57 +9,57 @@
             <form string="Reservation">
                 <header>
                     <button
-                        name="action_send_reservation_mail"
-                        type="object"
-                        string="Send Reservation Email"
-                        states="confirm"
-                        class="oe_highlight"
+                            name="action_send_reservation_mail"
+                            type="object"
+                            string="Send Reservation Email"
+                            states="confirm"
+                            class="oe_highlight"
                     />
 
-<!--                        name="confirm_reservation"-->
+                    <!--                        name="confirm_reservation"-->
                     <button
-                        name="create_folio"
-                        string="Confirm"
-                        states="draft"
-                        class="oe_highlight"
-                        type="object"
-                    />
-<!--                    <button-->
-<!--                        name="create_folio"-->
-<!--                        string="Create Folio"-->
-<!--                        states="confirm"-->
-<!--                        class="oe_highlight"-->
-<!--                        type="object"-->
-<!--                    />-->
-                    <button
-                        name="cancel_reservation"
-                        string="Cancel Reservation"
-                        states="draft,confirm"
-                        class="oe_highlight"
-                        type="object"
+                            name="confirm_reservation"
+                            string="Confirm"
+                            states="draft"
+                            class="oe_highlight"
+                            type="object"
                     />
                     <button
-                        name="set_to_draft_reservation"
-                        string="Set to Draft"
-                        states="cancel"
-                        class="oe_highlight"
-                        type="object"
+                            name="create_folio"
+                            string="Create Folio"
+                            states="confirm"
+                            class="oe_highlight"
+                            type="object"
+                    />
+                    <button
+                            name="cancel_reservation"
+                            string="Cancel Reservation"
+                            states="draft,confirm"
+                            class="oe_highlight"
+                            type="object"
+                    />
+                    <button
+                            name="set_to_draft_reservation"
+                            string="Set to Draft"
+                            states="cancel"
+                            class="oe_highlight"
+                            type="object"
                     />
                     <field name="state" widget="statusbar" />
                 </header>
                 <sheet>
                     <div class="oe_button_box">
                         <button
-                            name="open_folio_view"
-                            type="object"
-                            icon="fa-file-text-o"
-                            class="oe_stat_button"
-                            attrs="{'invisible': [('no_of_folio', '=', 0)]}"
+                                name="open_folio_view"
+                                type="object"
+                                icon="fa-file-text-o"
+                                class="oe_stat_button"
+                                attrs="{'invisible': [('no_of_folio', '=', 0)]}"
                         >
                             <field
-                                name="no_of_folio"
-                                widget="statinfo"
-                                string="Folio"
+                                    name="no_of_folio"
+                                    widget="statinfo"
+                                    string="Folio"
                             />
                         </button>
                     </div>
@@ -75,24 +75,24 @@
                         <separator />
                         <group colspan="4" col="4">
                             <field
-                                name="partner_id"
-                                domain="[('customer_rank','>', 0)]"
-                                context="{'default_customer_rank': 1}"
+                                    name="partner_id"
+                                    domain="[('customer_rank','>', 0)]"
+                                    context="{'default_customer_rank': 1}"
                             />
                             <field name="pricelist_id" col="2" />
                             <field
-                                name="partner_order_id"
-                                domain="[('parent_id','=',partner_id)]"
+                                    name="partner_order_id"
+                                    domain="[('parent_id','=',partner_id)]"
                             />
                             <newline />
                             <field
-                                name="partner_invoice_id"
-                                domain="[('parent_id','=',partner_id)]"
+                                    name="partner_invoice_id"
+                                    domain="[('parent_id','=',partner_id)]"
                             />
                             <field
-                                name="partner_shipping_id"
-                                domain="[('parent_id','=',partner_id)]"
-                                invisible="True"
+                                    name="partner_shipping_id"
+                                    domain="[('parent_id','=',partner_id)]"
+                                    invisible="True"
                             />
                         </group>
                         <group colspan="4" col="4">
@@ -112,17 +112,17 @@
                                     <newline />
                                     <separator string="Select Room" />
                                     <field
-                                        name="reserve"
-                                        colspan="4"
-                                        string="Room Number"
-                                        nolabel="1"
+                                            name="reserve"
+                                            colspan="4"
+                                            string="Room Number"
+                                            nolabel="1"
                                     />
                                 </form>
                                 <tree>
                                     <field
-                                        name="reserve"
-                                        string="Rooms"
-                                        widget="many2many_tags"
+                                            name="reserve"
+                                            string="Rooms"
+                                            widget="many2many_tags"
                                     />
                                 </tree>
                             </field>
@@ -141,9 +141,9 @@
         <field name="model">hotel.reservation</field>
         <field name="arch" type="xml">
             <tree
-                decoration-bf="state == 'draft'"
-                decoration-info="state == 'done'"
-                decoration-muted="state=='cancel'"
+                    decoration-bf="state == 'draft'"
+                    decoration-info="state == 'done'"
+                    decoration-muted="state=='cancel'"
             >
                 <field name="reservation_no" />
                 <field name="partner_id" />
@@ -160,21 +160,21 @@
         <field name="arch" type="xml">
             <search string="Reservation">
                 <filter
-                    name='current_reservations'
-                    string="Current Reservations"
-                    domain="[('checkout','&gt;=',datetime.datetime.now().replace(hour=0, minute=0, second=0)),('checkin','&lt;=',datetime.datetime.now().replace(hour=23, minute=59, second=59))]"
-                    help="Current Reservations"
+                        name='current_reservations'
+                        string="Current Reservations"
+                        domain="[('checkout','&gt;=',datetime.datetime.now().replace(hour=0, minute=0, second=0)),('checkin','&lt;=',datetime.datetime.now().replace(hour=23, minute=59, second=59))]"
+                        help="Current Reservations"
                 />
                 <filter name='draft' domain="[('state','=','draft')]" string="Draft" />
                 <filter
-                    name='confirm'
-                    domain="[('state','=','confirm')]"
-                    string="Confirm"
+                        name='confirm'
+                        domain="[('state','=','confirm')]"
+                        string="Confirm"
                 />
                 <filter
-                    name='cancel'
-                    domain="[('state','=','cancel')]"
-                    string="Cancel"
+                        name='cancel'
+                        domain="[('state','=','cancel')]"
+                        string="Cancel"
                 />
                 <filter name='done' domain="[('state','=','done')]" string="Done" />
                 <field name="partner_id" />
@@ -185,17 +185,17 @@
                 <newline />
                 <group expand="0" string="Group By">
                     <filter
-                        name="partner_id"
-                        string="Guest Name"
-                        icon="terp-personal"
-                        domain="[]"
-                        context="{'group_by':'partner_id'}"
+                            name="partner_id"
+                            string="Guest Name"
+                            icon="terp-personal"
+                            domain="[]"
+                            context="{'group_by':'partner_id'}"
                     />
                     <filter
-                        name='order_by_month'
-                        string="Order By Month"
-                        domain="[]"
-                        context="{'group_by':'date_order'}"
+                            name='order_by_month'
+                            string="Order By Month"
+                            domain="[]"
+                            context="{'group_by':'date_order'}"
                     />
                 </group>
             </search>
@@ -219,10 +219,10 @@
         <field name="priority" eval="2" />
         <field name="arch" type="xml">
             <calendar
-                string="Current Reservation"
-                date_start="checkin"
-                date_stop="checkout"
-                color="partner_id"
+                    string="Current Reservation"
+                    date_start="checkin"
+                    date_stop="checkout"
+                    color="partner_id"
             >
                 <field name="partner_id" />
             </calendar>
@@ -236,17 +236,17 @@
         <field name="view_mode">tree,form,calendar</field>
     </record>
     <menuitem
-        id="menu_hotel_reservation"
-        name="Reservations"
-        parent="hotel.hotel_management_menu"
-        sequence="1"
+            id="menu_hotel_reservation"
+            name="Reservations"
+            parent="hotel.hotel_management_menu"
+            sequence="1"
     />
     <menuitem
-        name="Reservations"
-        id="menu_action_hotel_reservation_tree_all"
-        action="action_hotel_reservation_tree_all"
-        parent="menu_hotel_reservation"
-        sequence="3"
+            name="Reservations"
+            id="menu_action_hotel_reservation_tree_all"
+            action="action_hotel_reservation_tree_all"
+            parent="menu_hotel_reservation"
+            sequence="3"
     />
     <record id="view_hotel_room_form_inherited" model="ir.ui.view">
         <field name="name">view.hotel.room.form.inherited</field>
@@ -257,10 +257,10 @@
                 <page name="room_reservation" string="Room Reservation">
                     <separator colspan='4' string="Room Reservation Line" />
                     <field
-                        name="room_reservation_line_ids"
-                        colspan="4"
-                        nolabel='1'
-                        string="Room Reservation Line"
+                            name="room_reservation_line_ids"
+                            colspan="4"
+                            nolabel='1'
+                            string="Room Reservation Line"
                     >
                         <form string=" Room line">
                             <group colspan='4' col='4'>
@@ -337,10 +337,10 @@
                         <page name="room_summary" string="Room Summary">
                             <field name="summary_header" colspan="4" invisible="1" />
                             <field
-                                name="room_summary"
-                                colspan="4"
-                                invisible="0"
-                                widget="Room_Reservation"
+                                    name="room_summary"
+                                    colspan="4"
+                                    invisible="0"
+                                    widget="Room_Reservation"
                             />
                         </page>
                     </notebook>
@@ -374,10 +374,10 @@
                 <footer>
                     <group colspan="2" col="2">
                         <button
-                            string="Save"
-                            name="room_reserve"
-                            type="object"
-                            class="btn-primary"
+                                string="Save"
+                                name="room_reserve"
+                                type="object"
+                                class="btn-primary"
                         />
                         <button string="Cancel" special="cancel" class="btn-primary" />
                     </group>
@@ -392,10 +392,10 @@
         <field name="view_mode">form</field>
     </record>
     <menuitem
-        id="menu_action_hotel_reservation_summary"
-        name="Reservation Summary"
-        action="action_hotel_reservation_summary"
-        parent="menu_hotel_reservation"
-        sequence="3"
+            id="menu_action_hotel_reservation_summary"
+            name="Reservation Summary"
+            action="action_hotel_reservation_summary"
+            parent="menu_hotel_reservation"
+            sequence="3"
     />
 </odoo>

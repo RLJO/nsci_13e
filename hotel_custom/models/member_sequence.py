@@ -53,6 +53,42 @@ class member_sequence_order(models.Model):
             else:
                 record.age = 0
 
+class HotelManagement(models.Model):
+    _inherit = 'hotel.reservation'
+
+    in_field = fields.Boolean(string="Field", readonly=True, default=True)
+
+    partner_id = fields.Many2one('res.partner', string="New_Guest")
+
+    check_in = fields.Datetime(string="Check-In Date")
+
+    check_out = fields.Datetime(string="Check-Out Date")
+
+    def check_in_button(self):
+        for record in self:
+            record.check_in = datetime.today()
+
+    def check_out_button(self):
+        for record in self:
+            record.check_out = datetime.today()
+
+    @api.onchange('in_field')
+    def _onchange_in_field(self):
+        if self.in_field:
+            return {'domain': {'partner_id': [('membership_state', '=', 'paid')]}}
+
+
+class MembershipProductManagement(models.Model):
+    _inherit = 'product.template'
+
+# class RoomBookingManagement(models.Model):
+#     _name = 'something.else'
+#
+#     _inherit = 'quick.room.reservation'
+#
+#     new_field = fields.Char(string="New")
+#
+#     partner_id = fields.Many2one('res.partner', string="Works")
 # class member_family_details(models.Model):
 #     _name = 'member.family.details'
 #

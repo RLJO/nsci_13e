@@ -81,11 +81,11 @@ class BookingInformation(models.Model):
             else:
                 return {'domain': {}}
 
-    @api.onchange('source')
-    def _onchange_source_custom(self):
-        for record in self:
-            if record.source == 'm':
-                return {'domain': {'member_name': ['|', ('membership_state', '=', 'free'), ('membership_state', '=', 'paid')]}}
+    # @api.onchange('source')
+    # def _onchange_source_custom(self):
+    #     for record in self:
+    #         if record.source == 'm':
+    #             return {'domain': {'member_name': ['|', ('membership_state', '=', 'free'), ('membership_state', '=', 'paid')]}}
             # elif record.source == 'g':
             #     return {'attribute': {'member_name': [('non_member', '=', True)]}}
             # elif record.source == 'm':
@@ -99,16 +99,17 @@ class BookingInformation(models.Model):
 #
 #     c_gender = fields.Selection(selection=[('Male', 'Male'), ('Female', 'Female'),], string='Gender', default='')
 
-# class SalonChairManagement(models.Model):
-#     _inherit = 'salon.chair'
-#
-#     gender = fields.Char(string="Gender", compute="_onchange_chair_custom", store=True)
-#
-#     @api.onchange('user_of_chair')
-#     def _onchange_chair_custom(self):
-#         for record in self:
-#             if record.user_of_chair:
-#                 record.gender = record.user_of_chair.c_gender
+class HotelBookingManagement(models.TransientModel):
+    # _name = 'custom.change.wizard'
+
+    _inherit = 'quick.room.reservation'
+
+    gender = fields.Boolean(string='gender', default=True)
+
+    @api.onchange('gender')
+    def _onchange_gender(self):
+        if self.gender:
+            return {'domain': {'partner_id': [('membership_state', '=', 'paid')]}}
 
 class MasseurManagement(models.Model):
     _name = 'masseur.management'

@@ -25,7 +25,7 @@
         "views/assets.xml",
 
         # "views/member_sequence.xml"
-        "views/member_sequence.xml",
+        # "views/member_sequence.xml",
         "views/account_move_view_inherit.xml",
 
     ],

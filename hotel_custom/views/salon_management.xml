@@ -10,7 +10,7 @@
                  <field name="source"/>
                  <field name="member_name" domain="['|',('membership_state','=','paid'), ('free_member', '!=', False)]" attrs="{'invisible':[('source','!=','m')]}"/>
                  <field name="membership_id" attrs="{'invisible':[('source','!=','m')]}"/>
-                 <field name="guest_name" attrs="{'invisible':['|',('source','!=','w'), ('source','!=','w')]}"/>
+                 <field name="guest_name" attrs="{'invisible':[('source','!=','w')]}"/>
                  <field name="guest_name" attrs="{'invisible':[('source','!=','g')]}" domain="[('non_member', '!=', False)]" context="{'default_non_member':True}"/>
              </xpath>
 
@@ -101,5 +101,17 @@
 
     <menuitem id="masseur_master_custom" name="Masseur" parent="salon_management.salon_management_salon" action="salon_new_masseur"/>
 <!--    <menuitem id="salon_management_bookings" name="Bookings" parent="salon_management_salon" action="salon_booking_action"/>-->
+
+    <record id="custom_salon" model="ir.ui.view">
+         <field name="name">custom.salon</field>
+         <field name="model">quick.room.reservation</field>
+<!--         <field name="res_model">custom.change.wizard</field>-->
+         <field name="inherit_id" ref="hotel_reservation.quick_room_reservation_form_view"/>
+         <field name="arch" type="xml">
+             <xpath expr="//field[@name='adults']" position='after'>
+                 <field name="gender" attrs="{'invisible':1}"/>
+             </xpath>
+         </field>
+    </record>
 
 </odoo>
