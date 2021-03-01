@@ -8,7 +8,7 @@
 
              <xpath expr="//field[@name='name']" position='before'>
                  <field name="source"/>
-                 <field name="member_name" domain="['|',('membership_state','=','paid'), ('free_member', '!=', False)]" attrs="{'invisible':[('source','!=','m')]}"/>
+                 <field name="member_name" domain="['|',('membership_state','=','paid'), ('free_member', '!=', False), ('membership_state','=','old')]" attrs="{'invisible':[('source','!=','m')]}"/>
                  <field name="membership_id" attrs="{'invisible':[('source','!=','m')]}"/>
                  <field name="guest_name" attrs="{'invisible':[('source','!=','w')]}"/>
                  <field name="guest_name" attrs="{'invisible':[('source','!=','g')]}" domain="[('non_member', '!=', False)]" context="{'default_non_member':True}"/>

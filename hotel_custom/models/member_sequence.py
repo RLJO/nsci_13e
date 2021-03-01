@@ -75,7 +75,7 @@ class HotelManagement(models.Model):
     @api.onchange('in_field')
     def _onchange_in_field(self):
         if self.in_field:
-            return {'domain': {'partner_id': [('membership_state', '=', 'paid')]}}
+            return {'domain': {'partner_id': ['|',('membership_state', '=', 'paid'),(('membership_state', '=', 'old'))]}}
 
 
 class MembershipProductManagement(models.Model):

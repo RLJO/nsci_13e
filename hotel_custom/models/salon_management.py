@@ -109,7 +109,7 @@ class HotelBookingManagement(models.TransientModel):
     @api.onchange('gender')
     def _onchange_gender(self):
         if self.gender:
-            return {'domain': {'partner_id': [('membership_state', '=', 'paid')]}}
+            return {'domain': {'partner_id': ['|',('membership_state', '=', 'paid'),('membership_state', '=', 'old')]}}
 
 class MasseurManagement(models.Model):
     _name = 'masseur.management'
